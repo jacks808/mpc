@@ -109,7 +109,7 @@ int main() {
           // Run MPC
           Eigen::VectorXd state(6);
           state << x_d, y_d, psi_d, v_d, cte_d, epsi_d;
-          auto vars = mpc.Solve(state, coeffs);
+          auto vars = mpc.Solve(state, coeffs) / deg2rad(25);;
 
           double steer_value = vars[0];
           double throttle_value = vars[1];
