@@ -110,23 +110,16 @@ int main() {
           // Run MPC
           Eigen::VectorXd state(6);
           state << x_d, y_d, psi_d, v_d, cte_d, epsi_d;
-          auto a = deg2rad(25);
+
           auto vars = mpc.Solve(state, coeffs);
-
-          int count = vars.size();
-          for (int i = 0; i < count;i++) {
-            vars[i] = vars[i] / a;
-          }
-
           double steer_value = vars[0];
           double throttle_value = vars[1];
-
 
           json msgJson;
           // NOTE: Remember to divide by deg2rad(25) before you send the 
           //   steering value back. Otherwise the values will be in between 
           //   [-deg2rad(25), deg2rad(25] instead of [-1, 1].
-          msgJson["steering_angle"] = steer_value;
+          msgJson["steering_angle"] = steer_value / deg2rad(25);
           msgJson["throttle"] = throttle_value;
 
           // Display the MPC predicted trajectory 
