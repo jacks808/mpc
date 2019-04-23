@@ -32,7 +32,9 @@ predict equations:
   * *cte<sub>t+1</sub> = f(x<sub>t</sub>) - y<sub>t</sub> + v<sub>t</sub> \* sin(e&psi;<sub>t</sub>) \* dt<br/>*
   * *e&psi;<sub>t+t</sub> = &psi;<sub>t</sub> - &psi;des<sub>t</sub> + v<sub>t</sub> / Lf  \* &delta;<sub>t</sub> \* dt<br/>*
 
-The functions *f(x)* and *&psi;des* are polynomial functions calculated from the waypoints.
+The functions *f(x)* and *&psi;des* are polynomial functions calculated from the waypoints: 
+
+![](https://ws1.sinaimg.cn/large/006tNc79ly1g2cw4t8p9cj30y00nwtel.jpg)
 
 Cost functions: 
 
