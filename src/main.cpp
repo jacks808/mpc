@@ -103,13 +103,20 @@ int main() {
           double cte_d = cte0 + (v * sin(epsi0) * latency);
 
           // epsi[t] = psi[t] - psides[t-1] + v[t-1] * delta[t-1] / Lf * dt
-          double epsi_d = epsi0 - (v * atan(coeffs[1]) * latency / Lf);
+//          double epsi_d = epsi0 - (v * atan(coeffs[1]) * latency / Lf);
+          double epsi_d = epsi0 + v * -delta / Lf * latency;
 
 
           // Run MPC
           Eigen::VectorXd state(6);
           state << x_d, y_d, psi_d, v_d, cte_d, epsi_d;
-          auto vars = mpc.Solve(state, coeffs) / deg2rad(25);;
+          auto a = deg2rad(25);
+          auto vars = mpc.Solve(state, coeffs);
+
+          int count = vars.size();
+          for (int i = 0; i < count;i++) {
+            vars[i] = vars[i] / a;
+          }
 
           double steer_value = vars[0];
           double throttle_value = vars[1];
